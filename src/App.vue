@@ -1,16 +1,25 @@
 <template>
   <HeaderMenu />
   <router-view />
+  <LoaderModel v-if="systemStore.isLoading" />
 </template>
 
 <script>
 import HeaderMenu from '@/components/HeaderMenu.vue'
+import LoaderModel from '@/components/LoaderModel.vue'
+import { useSystemStore } from '@/stores'
 
 export default {
   name: 'App',
   components: {
-    HeaderMenu
-  }
+    HeaderMenu,
+    LoaderModel,
+  },
+  data () {
+        return {
+            systemStore: useSystemStore()
+        }
+    }
 }
 </script>
 
