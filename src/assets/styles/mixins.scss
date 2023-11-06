@@ -10,3 +10,10 @@
       width: calc(100% - 2 * $margin-screen-mobile);
     }
   }
+  @mixin link {
+    text-decoration: none;
+    color: black;
+    &:hover {
+        opacity: 0.6;
+    }
+  }

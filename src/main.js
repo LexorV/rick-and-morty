@@ -12,13 +12,21 @@ import {
     createPinia
 } from "pinia";
 import MainPage from '@/page/MainPage'
+import CharacterPage from '@/page/CharacterPage'
 
 
 const router = createRouter({
     routes: [{
         path: '/',
         component: MainPage
-    }, ],
+    },
+    {
+        path: '/character/:id',
+        component: CharacterPage
+    },
+    
+
+],
     history: createWebHistory()
 })
 

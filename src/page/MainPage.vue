@@ -2,16 +2,19 @@
     <main class="main">
         <SearchForm />
         <h1> Главная страница</h1>
+        <BoardPerson/>
     </main>
 </template>
 
 <script>
 import SearchForm from '@/components/main/SearchForm.vue'
 import { usePersonsStore } from '@/stores'
+import BoardPerson from '@/components/main/BoardPerson.vue'
 export default {
     name: 'MainPage',
     components: {
-        SearchForm
+        SearchForm,
+        BoardPerson
 
     },
     mounted() {
