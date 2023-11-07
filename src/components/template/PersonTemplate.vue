@@ -1,7 +1,8 @@
 <template>
     <div>
         <h3>
-        <router-link class="link" :to="'character/' + person.id">
+        <router-link :class="`link ${isPage  ? 'not_link' : ''}`"
+         :to="'character/' + person.id">
             {{ person.name }}
         </router-link>
         </h3>
@@ -17,6 +18,11 @@ export default {
         person: {
             type: Object,
             default: () => {}
+        },
+        isPage: {
+            type: Boolean,
+            default:false,
+
         }
     }
     
@@ -26,6 +32,9 @@ export default {
 <style lang="scss" scoped>
 .link {
     @include link
+}
+.not_link {
+    pointer-events: none;
 }
 
 </style>

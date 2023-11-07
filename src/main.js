@@ -13,6 +13,7 @@ import {
 } from "pinia";
 import MainPage from '@/page/MainPage'
 import CharacterPage from '@/page/CharacterPage'
+import EpisodePage from '@/page/EpisodePage'
 
 
 const router = createRouter({
@@ -23,6 +24,10 @@ const router = createRouter({
     {
         path: '/character/:id',
         component: CharacterPage
+    },
+    {
+        path: '/episode/:id',
+        component: EpisodePage
     },
     
 

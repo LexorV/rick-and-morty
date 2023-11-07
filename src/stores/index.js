@@ -1,3 +1,4 @@
 import { usePersonsStore } from './PersonsStore';
 import { useSystemStore } from './SystemStore';
-export { usePersonsStore, useSystemStore }
+import { useEpisodeStore } from './EpisodeStore';
+export { usePersonsStore, useSystemStore, useEpisodeStore }

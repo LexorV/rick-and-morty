@@ -1,6 +1,8 @@
 <template>
     <div>
-        <PersonTemplate :person="personsStore.onePerson" />
+        <PersonTemplate :isPage=true :person="personsStore.onePerson">
+            <p> Местоположение: {{ personsStore.location }} </p>
+            </PersonTemplate>
     </div>
 </template>
 

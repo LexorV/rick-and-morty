@@ -6,7 +6,8 @@ import { useSystemStore } from "./SystemStore";
 export const usePersonsStore = defineStore("PersonsStore", {
   state: () => ({
     persons: [],
-    onePerson: {}
+    onePerson: {},
+    location: '',
   }),
   getters: {
   },
@@ -32,6 +33,8 @@ export const usePersonsStore = defineStore("PersonsStore", {
        try {
           const res = await axios.get(`${API}character/${id}`);
           this.onePerson = res.data;
+          this.location = Object.assign(res.data.location.name);
+
         }
         catch (err) {
           console.log(err)
