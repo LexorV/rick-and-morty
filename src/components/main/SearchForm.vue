@@ -12,6 +12,7 @@
 import BasicButton from '@/components/ui/BasicButton.vue'
 import BasicField from '@/components/ui/BasicField.vue'
 import BasicSelect from '@/components/ui/BasicSelect.vue'
+import { usePersonsStore } from '@/stores'
 import { listStatusPersons } from '@/services/constants';
 export default {
     components: {
@@ -25,12 +26,12 @@ export default {
             search: '',
             status: '',
             listSelect: listStatusPersons,
+            personsStore: usePersonsStore()
         }
     },
     methods: {
         searchSubmit () {
-            console.log(this.status)
-            console.log(this.search)
+            this.personsStore.searchPerson(this.search, this.status)
         }
     }
 }

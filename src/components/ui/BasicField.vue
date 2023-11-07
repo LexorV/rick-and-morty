@@ -31,7 +31,7 @@ export default {
     border: 1px solid #D5DAE1;
     background-color: white;
     border-radius: 8px;
-    color: gray;
+    color: rgb(24, 24, 24);
     padding-left: 32px;
     padding-right: 72px;
     box-sizing: border-box;

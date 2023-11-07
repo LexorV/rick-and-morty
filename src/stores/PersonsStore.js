@@ -43,5 +43,23 @@ export const usePersonsStore = defineStore("PersonsStore", {
           systemStore.isLoading = false
         }
         },
+
+        async searchPerson(name, status = 'alive') {
+          const systemStore = useSystemStore()
+          systemStore.isLoading = true
+         try {
+            const res = await axios.get(`${API}character/?name=${name}&status=${status}`);
+           console.log(res.data.results)
+            this.persons = res.data.results;
+          }
+          catch (err) {
+            this.persons = [];
+            console.log(err)
+          }
+          finally {
+            systemStore.isLoading = false
+          }
+          },
+        
   },
 });

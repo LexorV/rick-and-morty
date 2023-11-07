@@ -6,6 +6,7 @@
          :person="item"
          />
     </ul>
+    <div v-if=" personsStore.persons.length < 1"> Персонаж не существует</div>
 </template>
 
 <script>

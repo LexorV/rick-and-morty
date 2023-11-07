@@ -1,11 +1,6 @@
 <template>
     <div class="container">
         <select @input="$emit('update:value', $event.target.value)" class="select">
-            <option value="">
-                --
-                {{ name }}
-                --
-            </option>
             <option v-for="(item, index) of listSelect" :key="index">
                 {{ item }}
             </option>
@@ -19,10 +14,6 @@
 import { uniqid } from '@/services/helpers'
 export default {
     props: {
-        name: {
-            type: String,
-            default: "Status",
-        },
         listSelect: {
             type: Array,
             default: () => []
