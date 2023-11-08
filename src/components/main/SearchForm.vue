@@ -31,7 +31,7 @@ export default {
     },
     methods: {
         searchSubmit () {
-            this.personsStore.searchPerson(this.search, this.status)
+            this.personsStore.searchPerson(1, this.search, this.status)
         }
     }
 }
