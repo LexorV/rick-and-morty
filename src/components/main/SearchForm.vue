@@ -2,7 +2,7 @@
     <form class="form" @submit.prevent="searchSubmit">
         <BasicField v-model:value="search" />
         <div class="button-box"> 
-        <BasicSelect v-model:value="status" :listSelect="listSelect" />
+        <BasicSelect v-model:value="status" :defaultStatus="status" :listSelect="listSelect" />
         <BasicButton type="submit" text="Поиск"  />
         </div>
     </form>
@@ -19,18 +19,19 @@ export default {
         BasicButton,
         BasicField,
         BasicSelect
-        
+   
     },
     data () {
         return {
-            search: '',
-            status: '',
+            search: usePersonsStore().searchName,
+            status: usePersonsStore().searchStatus,
             listSelect: listStatusPersons,
             personsStore: usePersonsStore()
         }
     },
     methods: {
         searchSubmit () {
+            this.personsStore.clearStoreFields();
             this.personsStore.searchPerson(1, this.search, this.status)
         }
     }
@@ -52,8 +53,11 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 700px) {
+        flex-direction: column;
+        gap: 10px;
 
+    }
 }
 
 </style>
-`1``

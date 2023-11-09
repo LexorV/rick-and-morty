@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <img class="logo" src="@/assets/logo.png">
-    <h1>Заголовок</h1>
+    <router-link to='/'><img class="logo" src="@/assets/logo.png">
+    </router-link>
     </div>
 </template>
 
@@ -11,18 +11,22 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
+  align-items: center;
   max-width: $desktop ;
+  margin-bottom: 20px;
 }
 .logo {
-  width: 100px;
-  height: 50px;
+  width: 250px;
+  height: 75px;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 }
 h1 {
-  margin: 40px 0 0;
+  margin: 0;
 }
 </style>

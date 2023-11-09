@@ -7,7 +7,7 @@
             <li v-for="(item, index) of episodeStore.characters" 
                 :key="item.id">
                 <router-link :to="'/character/' + episodeStore.charactersNumber[index]" exact >
-                    <img :src="item.image" alt="Картинка">
+                    <img class='picture' :src="item.image" alt="Картинка">
                 </router-link>
             </li>
 
@@ -43,8 +43,12 @@ export default {
 <style lang="scss" scoped>
 .list__character {
     display: flex;
+    justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
+}
+.picture {
+    @include picture
 }
 
 </style>

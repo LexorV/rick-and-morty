@@ -6,7 +6,7 @@
          :person="item"
          />
     </ul>
-    <div v-if=" personsStore.persons.length < 1"> Персонаж не существует</div>
+    <div v-if="personsStore.errorSerch"> {{ checkError }}</div>
 </template>
 
 <script>
@@ -19,6 +19,13 @@ export default {
     data () {
         return {
             personsStore: usePersonsStore()
+        }
+    },
+    computed: {
+        checkError() {
+            return this.personsStore.errorSerch === 'There is nothing here'
+            ? 'Персонаж не существует'
+            : this.personsStore.errorSerch 
         }
     }
 }

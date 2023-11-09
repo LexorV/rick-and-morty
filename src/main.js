@@ -14,6 +14,7 @@ import {
 import MainPage from '@/page/MainPage'
 import CharacterPage from '@/page/CharacterPage'
 import EpisodePage from '@/page/EpisodePage'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 
 const router = createRouter({
@@ -38,6 +39,6 @@ const router = createRouter({
 
 createApp(App)
     .use(router)
-    .use(createPinia())
+    .use(createPinia().use(piniaPluginPersistedstate))
     .use(VueAxios, axios)
     .mount('#app')

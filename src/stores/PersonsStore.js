@@ -14,12 +14,15 @@ export const usePersonsStore = defineStore("PersonsStore", {
     persons: [],
     maxPersonsAllpages: 1,
     maxPersonsSearchPages: 1,
+    pageNow: 1,
     onePerson: {},
     location: '',
     searchName: '',
     searchStatus: 'alive',
-    isAll: true,
+    newSearch: true,
+    errorSerch: ''
   }),
+  persist: true,
   getters: {},
   actions: {
     async getPersons(page = 1) {
@@ -43,7 +46,6 @@ export const usePersonsStore = defineStore("PersonsStore", {
         const res = await axios.get(`${API}character/${id}`);
         this.onePerson = res.data;
         this.location = Object.assign(res.data.location.name);
-
       } catch (err) {
         console.log(err)
       } finally {
@@ -56,22 +58,34 @@ export const usePersonsStore = defineStore("PersonsStore", {
       systemStore.isLoading = true
       try {
         const res = await axios.get(`${API}character/?page=${page}&name=${name}&status=${status}`);
-        if (this.isAll || name !== this.searchName || status !== this.searchStatus ) {
+        if (name !== this.searchName || status !== this.searchStatus || this.newSearch ) {
           this.persons = res.data.results
-        } else { this.persons = this.persons.concat(res.data.results) }
+          this.pageNow = 1
+        } else {
+          this.persons = this.persons.concat(res.data.results)
+        }
         this.maxPersonsSearchPages = res.data.info.pages
         this.searchName = name;
         this.searchStatus = status;
-        this.isAll = false;
+        this.errorSerch = '';
       } catch (err) {
         this.persons = [];
-        console.log(err)
+        err.response ? this.errorSerch = err.response.data.error:console.log(err)
       } finally {
         systemStore.isLoading = false
       }
     },
-    setAll() {
-      this.isAll = !this.isAll
+    setPageNow(page) {
+      this.pageNow = page
+    },
+
+    clearStoreFields() {
+      this.searchName = '';
+      this.searchStatus = 'alive';
+      this.newSearch = true;
+    },
+    newSearchOff() {
+      this.newSearch = false;
     }
 
   },

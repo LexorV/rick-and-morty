@@ -1,7 +1,7 @@
 <template>
     <main class="main">
         <SearchForm />
-        <h1> Главная страница</h1>
+        <h1> Персонажи</h1>
         <BoardPerson />
     </main>
 </template>
@@ -17,13 +17,9 @@ export default {
         BoardPerson
 
     },
-    mounted() {
-        this.personsStore.getPersons(this.page)
-    },
     data() {
         return {
-            pageAll: 1,
-            pageSearch: 1,
+            pageSearch: usePersonsStore().pageNow,
             personsStore: usePersonsStore(),
             search: '',
         }
@@ -35,7 +31,7 @@ export default {
         document.removeEventListener('scroll', this.eventHandler);
     },
     methods: {
-        //Логика с infinite-scroll. Изначально выводит всех персонажей.
+        //Логика infinite-scroll.
         eventHandler  () {
                 const scrollTop = document.documentElement.scrollTop
                 const viewportHeight = window.innerHeight
@@ -43,20 +39,12 @@ export default {
 
                 const atTheBottom = scrollTop + viewportHeight == totalHeight
                 if (atTheBottom) {
-                    if(this.personsStore.isAll) {
-                        const newPage = this.pageAll + 1
-                        if(this.personsStore.maxPersonsAllpages !== newPage) {
-                    this.pageAll = newPage
-                    this.personsStore.getPersons(newPage)
-                }
-                    }
-                    else {
-                        const newPage = this.pageSearch + 1
-                        if(this.personsStore.maxPersonsSearchPages !== newPage) {
-                    this.pageSearch = newPage
+                        const newPage = usePersonsStore().pageNow + 1;
+                        if(this.personsStore.maxPersonsSearchPages >= newPage) {
+                    this.personsStore.newSearchOff()
+                    this.personsStore.setPageNow(newPage) 
                     this.personsStore.searchPerson(newPage)}
                     }
-                }
             }
     }
 }

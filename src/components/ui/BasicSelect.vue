@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <select @input="$emit('update:value', $event.target.value)" class="select">
-            <option v-for="(item, index) of listSelect" :key="index">
+            <option v-for="(item, index) of listSelect" :selected="item == defaultStatus" :key="index">
                 {{ item }}
             </option>
 
@@ -21,6 +21,10 @@ export default {
         value: {
             type: String,
             default: ''
+        },
+        defaultStatus: {
+            type:String,
+            default: 'alive'
         }
     },
     methods: {
@@ -77,14 +81,12 @@ export default {
         height: 40px;
 
 
-        @media screen and (max-width: 767px) {
-            width: 48px;
-            font-size: 0;
-            padding-left: 14px;
+        @media screen and (max-width: 700px) {
+            width: 100%;
+            font-size: 14px;
+            padding-left: 10px;
 
-            &:before {
-                border: none;
-            }
+           
         }
     }
 }

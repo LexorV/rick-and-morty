@@ -1,7 +1,7 @@
 <template>
     <li class="card">
         <PersonTemplate :person="person">
-            <h2>Учавствуеет в следующих эпизодах:</h2>
+            <h2 class="title">Учавствует в следующих эпизодах:</h2>
             <ul>
                 <li v-for="(item, index) of generateEpisode" 
                 :key="index">
@@ -39,11 +39,14 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-    background-color: rgb(216, 216, 228);
+    background-color: rgb(228, 228, 255);
     width: 100%;
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
+}
+.title {
+    font-size: 16px;
 }
 .link {
     font-size: 20px;

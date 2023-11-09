@@ -1,9 +1,6 @@
 <template>
-    <input type='input' 
-    :value="value" 
-    :placeholder="placeholder" 
-    class="field" 
-    @input="$emit('update:value', $event.target.value)" />
+    <input type='input' :value="value" :placeholder="placeholder" class="field"
+        @input="$emit('update:value', $event.target.value)" />
 </template>
 
 <script>
@@ -16,9 +13,7 @@ export default {
         value: {
             type: String,
             default: ''
-    },
-
-
+        },
     },
     emits: ['update:value'],
 }
@@ -36,8 +31,9 @@ export default {
     padding-right: 72px;
     box-sizing: border-box;
     outline: none;
-    
+
 }
+
 .field:focus {
     border: 2px solid blue;
 }
