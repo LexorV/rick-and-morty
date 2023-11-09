@@ -12,19 +12,33 @@ import {
     createPinia
 } from "pinia";
 import MainPage from '@/page/MainPage'
+import CharacterPage from '@/page/CharacterPage'
+import EpisodePage from '@/page/EpisodePage'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 
 const router = createRouter({
     routes: [{
         path: '/',
         component: MainPage
-    }, ],
+    },
+    {
+        path: '/character/:id',
+        component: CharacterPage
+    },
+    {
+        path: '/episode/:id',
+        component: EpisodePage
+    },
+    
+
+],
     history: createWebHistory()
 })
 
 
 createApp(App)
     .use(router)
-    .use(createPinia())
+    .use(createPinia().use(piniaPluginPersistedstate))
     .use(VueAxios, axios)
     .mount('#app')
