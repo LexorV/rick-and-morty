@@ -7,5 +7,8 @@ export const useSystemStore = defineStore("SystemStore", {
   getters: {
   },
   actions: {
+    setIsloading() {
+      this.isLoading = !this.isLoading
+    }
   },
 });

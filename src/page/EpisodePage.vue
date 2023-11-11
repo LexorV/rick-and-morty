@@ -1,12 +1,12 @@
 <template>
     <div>
-        <h2>{{ episodeStore.name }}</h2>
-        <span> Дата премьеры: {{  episodeStore.air_date }}</span>
+        <h2>{{ name }}</h2>
+        <span> Дата премьеры: {{  air_date }}</span>
         <h3> Персонажи</h3>
         <ul class="list__character">
-            <li v-for="(item, index) of episodeStore.characters" 
+            <li v-for="(item, index) of characters" 
                 :key="item.id">
-                <router-link :to="'/character/' + episodeStore.charactersNumber[index]" exact >
+                <router-link :to="'/character/' + charactersNumber[index]" exact >
                     <img class='picture' :src="item.image" alt="Картинка">
                 </router-link>
             </li>
@@ -16,27 +16,41 @@
 </template>
 
 <script>
-import { useEpisodeStore } from '@/stores'
+import axios from 'axios';
+import { API } from "@/services/constants";
+import { useSystemStore } from '@/stores';
 export default {
-    props: {
-        episode: {
-            type: Object,
-            default: () => {}
-        },
-    },
     data () {
         return {
-            episodeStore: useEpisodeStore()
+            name: '',
+            air_date: new Date(),
+            characters: [],
+            charactersNumber: [],
+            systemStore: useSystemStore(),
         }
     },
     mounted () {
-        this.episodeStore.getEpisode(this.$route.params.id)
+        this.getEpisode(this.$route.params.id)
     },
-        computed: {
-        generateCharacter() {
-            return this.person.episode.map((el) => el.replace(/[^0-9]/g,""))
-        }
-    },
+    methods: {
+        async getEpisode(id) {
+            this.systemStore.setIsloading()
+            try {
+                const res = await axios.get(`${API}episode/${id}`);
+                const { name, air_date, characters } = res.data;
+                this.name = name;
+                this.air_date = air_date;
+                const charactersNumber = characters.map((el) => el.replace(/[^0-9]/g, ""))
+                const listCharacters = await axios.get(`${API}character/${charactersNumber}`)
+                this.charactersNumber = charactersNumber
+                this.characters = listCharacters.data
+            } catch (err) {
+                console.log(err)
+            } finally {
+                this.systemStore.setIsloading()
+            }
+        },
+    }
     }
 </script>
 
