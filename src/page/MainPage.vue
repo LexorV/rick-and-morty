@@ -33,11 +33,11 @@ export default {
     methods: {
         //Логика infinite-scroll.
         eventHandler  () {
-                const scrollTop = document.documentElement.scrollTop
-                const viewportHeight = window.innerHeight
+                const scrollTop = window.scrollY
+                const viewportHeight = window.screen.height
+                const viewportWidth = window.screen.width
                 const totalHeight = document.documentElement.offsetHeight
-
-                const atTheBottom = scrollTop + viewportHeight == totalHeight
+                const atTheBottom = scrollTop + viewportHeight + (viewportWidth< 500 ? 1000:0) >= totalHeight
                 if (atTheBottom) {
                         const newPage = usePersonsStore().pageNow + 1;
                         if(this.personsStore.maxPersonsSearchPages >= newPage) {
