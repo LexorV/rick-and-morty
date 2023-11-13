@@ -23,32 +23,11 @@ export default {
         return {
             personsStore: usePersonsStore(),
             systemStore: useSystemStore(),
-            name: '',
-            air_date: new Date(),
             onePerson: {},
-            characters: [],
-            charactersNumber: [],
             location: '',
         }
     },
     methods: {
-        async getEpisode(id) {
-            this.systemStore.setIsloading()
-            try {
-                const res = await axios.get(`${API}episode/${id}`);
-                const { name, air_date, characters } = res.data;
-                this.name = name;
-                this.air_date = air_date;
-                const charactersNumber = characters.map((el) => el.replace(/[^0-9]/g, ""))
-                const listCharacters = await axios.get(`${API}character/${charactersNumber}`)
-                this.charactersNumber = charactersNumber
-                this.characters = listCharacters.data
-            } catch (err) {
-                console.log(err)
-            } finally {
-                this.systemStore.setIsloading()
-            }
-        },
         async getOnePerson(id) {
             this.systemStore.setIsloading()
             try {

@@ -15,8 +15,6 @@ export const usePersonsStore = defineStore("PersonsStore", {
     maxPersonsAllpages: 1,
     maxPersonsSearchPages: 1,
     pageNow: 1,
-    onePerson: {},
-    location: '',
     searchName: '',
     searchStatus: 'alive',
     newSearch: true,
@@ -32,20 +30,6 @@ export const usePersonsStore = defineStore("PersonsStore", {
         const res = await axios.get(`${API}character/?page=${page}`);
         this.persons = this.persons.concat(res.data.results);
         this.maxPersonsAllpages = res.data.info.pages
-      } catch (err) {
-        console.log(err)
-      } finally {
-        systemStore.isLoading = false
-      }
-    },
-
-    async getOnePerson(id) {
-      const systemStore = useSystemStore()
-      systemStore.isLoading = true
-      try {
-        const res = await axios.get(`${API}character/${id}`);
-        this.onePerson = res.data;
-        this.location = Object.assign(res.data.location.name);
       } catch (err) {
         console.log(err)
       } finally {

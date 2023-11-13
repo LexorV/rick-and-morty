@@ -6,7 +6,7 @@
             {{ person.name }}
         </router-link>
         </h3>
-        <p>Раздновидность {{  person.species }}</p>
+        <p>Разновидность {{  person.species }}</p>
         <img class="picture" :src="person.image" alt="Персонаж">
         <slot></slot>
     </div>

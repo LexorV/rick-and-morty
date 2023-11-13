@@ -10,7 +10,6 @@
                     <img class='picture' :src="item.image" alt="Картинка">
                 </router-link>
             </li>
-
         </ul>
     </div>
 </template>
